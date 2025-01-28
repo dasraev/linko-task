@@ -45,7 +45,7 @@ class ReportListApiView(APIView):
             OrderProduct.objects
             .annotate(hour=ExtractHour(F('order__created_at')))
             .values('product__id', 'product__name', 'hour')
-            .annotate(total_quantity=Sum('quantity'),total_price=F('price'))
+            .annotate(total_quantity=Sum('quantity'),total_price=Sum('price'))
         )
         data = {}
         for item in product_hour_sales:
